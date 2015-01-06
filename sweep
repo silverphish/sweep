@@ -1,0 +1,759 @@
+
+# ---------------------------------------------------------------------------------------------
+# start program - get user input
+# ---------------------------------------------------------------------------------------------
+
+def prompt(*args)
+    print(*args)
+    gets
+end
+puts " "
+puts " "
+puts " "
+puts " "
+puts "==========================================="
+puts "=             Sweep v0.1                  ="
+puts "=         (c) SilverPhish 2015            ="
+puts "=                                         ="
+puts "=    **for authorised pentesting only**   ="
+puts "==========================================="
+puts " "
+puts " "
+word1 = prompt "Enter first string: "
+word2 = prompt "Enter second string: "
+word3 = prompt "Enter third string: "
+pw_len = prompt "Min length of password: "
+reverse_parm = prompt "Reverse words (y/n): "
+new_file = prompt "Create new output file or append (n/a): "
+
+if word1.chomp == ""
+   word1 = "dummy"
+end
+if word2.chomp == ""
+   word2 = "dummy"
+end
+if word3.chomp == ""
+   word3 = "dummy"
+end
+
+# ---------------------------------------------------------------------------------------------
+# first sweep - create combinations with 'and', '_'  and spaces
+# ---------------------------------------------------------------------------------------------
+
+sweep = sweep = 1
+puts "sweep " + "#{sweep}" + ": creating combinations"
+
+num_words = 0
+
+contentsArray=[]  # start with an empty array
+contentsArray=["dummy", "dummy", "dummy"]  # start with an default array
+contentsArray[0]=word1
+contentsArray[1]=word2
+contentsArray[2]=word3
+output_file = File.open("sweep.tmp", "w")
+
+# first word formating:
+output_file.puts contentsArray[0].chomp
+if reverse_parm.chomp == "y"
+   output_file.puts contentsArray[0].chomp.reverse
+end
+output_file.puts contentsArray[0].chomp + "and" + contentsArray[1].chomp
+output_file.puts contentsArray[0].chomp + contentsArray[1].chomp
+output_file.puts contentsArray[0].chomp + "and" + contentsArray[2].chomp
+output_file.puts contentsArray[0].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[0].chomp + "and" + contentsArray[1].chomp + "and" + contentsArray[2].chomp
+
+output_file.puts contentsArray[0].chomp + " " + contentsArray[1].chomp
+output_file.puts contentsArray[0].chomp + contentsArray[1].chomp
+output_file.puts contentsArray[0].chomp + " " + contentsArray[2].chomp
+output_file.puts contentsArray[0].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[0].chomp + " " + contentsArray[1].chomp + " " + contentsArray[2].chomp
+
+output_file.puts contentsArray[0].chomp + "_" + contentsArray[1].chomp
+output_file.puts contentsArray[0].chomp + contentsArray[1].chomp
+output_file.puts contentsArray[0].chomp + "_" + contentsArray[2].chomp
+output_file.puts contentsArray[0].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[0].chomp + "_" + contentsArray[1].chomp + "_" + contentsArray[2].chomp
+
+# second word formating:
+output_file.puts contentsArray[1].chomp
+if reverse_parm.chomp == "y"
+   output_file.puts contentsArray[1].chomp.reverse
+end
+output_file.puts contentsArray[1].chomp + "and" + contentsArray[0].chomp
+output_file.puts contentsArray[1].chomp + contentsArray[0].chomp
+output_file.puts contentsArray[1].chomp + "and" + contentsArray[2].chomp
+output_file.puts contentsArray[1].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[1].chomp + "and" + contentsArray[0].chomp + "and" + contentsArray[2].chomp
+
+output_file.puts contentsArray[1].chomp + " " + contentsArray[0].chomp
+output_file.puts contentsArray[1].chomp + contentsArray[0].chomp
+output_file.puts contentsArray[1].chomp + " " + contentsArray[2].chomp
+output_file.puts contentsArray[1].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[1].chomp + " " + contentsArray[0].chomp + " " + contentsArray[2].chomp
+
+output_file.puts contentsArray[1].chomp + "_" + contentsArray[0].chomp
+output_file.puts contentsArray[1].chomp + contentsArray[0].chomp
+output_file.puts contentsArray[1].chomp + "_" + contentsArray[2].chomp
+output_file.puts contentsArray[1].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[1].chomp + "_" + contentsArray[0].chomp + "_" + contentsArray[2].chomp
+
+# third word formating:
+output_file.puts contentsArray[2].chomp
+if reverse_parm.chomp == "y"
+   output_file.puts contentsArray[2].chomp.reverse
+end
+output_file.puts contentsArray[2].chomp + "and" + contentsArray[0].chomp
+output_file.puts contentsArray[2].chomp + contentsArray[0].chomp
+output_file.puts contentsArray[2].chomp + "and" + contentsArray[1].chomp
+output_file.puts contentsArray[2].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[2].chomp + "and" + contentsArray[0].chomp + "and" + contentsArray[2].chomp
+
+output_file.puts contentsArray[2].chomp + " " + contentsArray[0].chomp
+output_file.puts contentsArray[2].chomp + contentsArray[0].chomp
+output_file.puts contentsArray[2].chomp + " " + contentsArray[1].chomp
+output_file.puts contentsArray[2].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[2].chomp + " " + contentsArray[0].chomp + " " + contentsArray[2].chomp
+
+output_file.puts contentsArray[2].chomp + "_" + contentsArray[0].chomp
+output_file.puts contentsArray[2].chomp + contentsArray[0].chomp
+output_file.puts contentsArray[2].chomp + "_" + contentsArray[1].chomp
+output_file.puts contentsArray[2].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[2].chomp + "_" + contentsArray[0].chomp + "_" + contentsArray[2].chomp
+
+# ---------------------------------------------------------------------------------------------
+# sweep - uppercase first characters    
+# ---------------------------------------------------------------------------------------------
+
+sweep = sweep + 1
+puts "sweep " + "#{sweep}" + ": uppercase first character"
+
+contentsArray[0]=word1.capitalize
+contentsArray[1]=word2.capitalize
+contentsArray[2]=word3.capitalize
+
+# first word formating:
+output_file.puts contentsArray[0].chomp
+if reverse_parm.chomp == "y"
+   output_file.puts contentsArray[0].chomp.reverse
+end
+output_file.puts contentsArray[0].chomp + "and" + contentsArray[1].chomp
+output_file.puts contentsArray[0].chomp + contentsArray[1].chomp
+output_file.puts contentsArray[0].chomp + "and" + contentsArray[2].chomp
+output_file.puts contentsArray[0].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[0].chomp + "and" + contentsArray[1].chomp + "and" + contentsArray[2].chomp
+
+output_file.puts contentsArray[0].chomp + " " + contentsArray[1].chomp
+output_file.puts contentsArray[0].chomp + contentsArray[1].chomp
+output_file.puts contentsArray[0].chomp + " " + contentsArray[2].chomp
+output_file.puts contentsArray[0].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[0].chomp + " " + contentsArray[1].chomp + " " + contentsArray[2].chomp
+
+output_file.puts contentsArray[0].chomp + "_" + contentsArray[1].chomp
+output_file.puts contentsArray[0].chomp + contentsArray[1].chomp
+output_file.puts contentsArray[0].chomp + "_" + contentsArray[2].chomp
+output_file.puts contentsArray[0].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[0].chomp + "_" + contentsArray[1].chomp + "_" + contentsArray[2].chomp
+
+# second word formating:
+output_file.puts contentsArray[1].chomp
+if reverse_parm.chomp == "y"
+   output_file.puts contentsArray[1].chomp.reverse
+end
+output_file.puts contentsArray[1].chomp + "and" + contentsArray[0].chomp
+output_file.puts contentsArray[1].chomp + contentsArray[0].chomp
+output_file.puts contentsArray[1].chomp + "and" + contentsArray[2].chomp
+output_file.puts contentsArray[1].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[1].chomp + "and" + contentsArray[0].chomp + "and" + contentsArray[2].chomp
+
+output_file.puts contentsArray[1].chomp + " " + contentsArray[0].chomp
+output_file.puts contentsArray[1].chomp + contentsArray[0].chomp
+output_file.puts contentsArray[1].chomp + " " + contentsArray[2].chomp
+output_file.puts contentsArray[1].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[1].chomp + " " + contentsArray[0].chomp + " " + contentsArray[2].chomp
+
+output_file.puts contentsArray[1].chomp + "_" + contentsArray[0].chomp
+output_file.puts contentsArray[1].chomp + contentsArray[0].chomp
+output_file.puts contentsArray[1].chomp + "_" + contentsArray[2].chomp
+output_file.puts contentsArray[1].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[1].chomp + "_" + contentsArray[0].chomp + "_" + contentsArray[2].chomp
+
+# third word formating:
+output_file.puts contentsArray[2].chomp
+if reverse_parm.chomp == "y"
+   output_file.puts contentsArray[2].chomp.reverse
+end
+output_file.puts contentsArray[2].chomp + "and" + contentsArray[0].chomp
+output_file.puts contentsArray[2].chomp + contentsArray[0].chomp
+output_file.puts contentsArray[2].chomp + "and" + contentsArray[1].chomp
+output_file.puts contentsArray[2].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[2].chomp + "and" + contentsArray[0].chomp + "and" + contentsArray[2].chomp
+
+output_file.puts contentsArray[2].chomp + " " + contentsArray[0].chomp
+output_file.puts contentsArray[2].chomp + contentsArray[0].chomp
+output_file.puts contentsArray[2].chomp + " " + contentsArray[1].chomp
+output_file.puts contentsArray[2].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[2].chomp + " " + contentsArray[0].chomp + " " + contentsArray[2].chomp
+
+output_file.puts contentsArray[2].chomp + "_" + contentsArray[0].chomp
+output_file.puts contentsArray[2].chomp + contentsArray[0].chomp
+output_file.puts contentsArray[2].chomp + "_" + contentsArray[1].chomp
+output_file.puts contentsArray[2].chomp + contentsArray[2].chomp
+output_file.puts contentsArray[2].chomp + "_" + contentsArray[0].chomp + "_" + contentsArray[2].chomp
+
+# ---------------------------------------------------------------------------------------------
+# delete sweep - remove any words not required
+# ---------------------------------------------------------------------------------------------
+
+
+# close output file then reopen to reprocess list so far and write to new file
+
+output_file.close
+output_file = File.open("sweep.tmp1", "w")
+File.open("sweep.tmp", "r") do |f2|
+  while line = f2.gets
+     if line =~ /dummy/
+        num_words = num_words + 0
+     elsif line =~ /ymmud/
+        num_words = num_words + 0
+     elsif line =~ /Dummy/
+        num_words = num_words + 0
+     elsif line =~ /ymmuD/
+        num_words = num_words + 0
+     else
+        num_words = num_words + 1
+        output_file.puts line
+     end
+  end
+end
+
+# ---------------------------------------------------------------------------------------------
+# sweep - add some numbers and characters to end and beginig of passwords
+# ---------------------------------------------------------------------------------------------
+
+sweep = sweep + 1
+puts "sweep " + "#{sweep}" + ": Adding numbers and characters"
+
+num_words = 0
+
+# close outout file then reopen to reprocess list so far and write to new file
+output_file.close
+output_file = File.open("sweep.tmp2", "w")
+num_lit = 000
+File.open("sweep.tmp1", "r") do |f1|
+  while line = f1.gets
+     num_lit = 000
+     output_file.puts line.chomp + ""
+     output_file.puts line
+#  add to begining:
+        output_file.puts line.chomp + "001"
+        output_file.puts line.chomp + "111"
+        output_file.puts line.chomp + "01"
+        output_file.puts line.chomp + "1"
+        output_file.puts line.chomp + "02"
+        output_file.puts line.chomp + "03"
+        output_file.puts line.chomp + "04"
+        output_file.puts line.chomp + "05"
+        output_file.puts line.chomp + "06"
+        output_file.puts line.chomp + "07"
+        output_file.puts line.chomp + "08"
+        output_file.puts line.chomp + "09"
+        output_file.puts line.chomp + "10"
+        output_file.puts line.chomp + "11"
+        output_file.puts line.chomp + "12"
+        output_file.puts line.chomp + "100"
+        output_file.puts line.chomp + "999"
+        output_file.puts line.chomp + "998"
+        output_file.puts line.chomp + "123"
+        output_file.puts line.chomp + "321"
+        output_file.puts line.chomp + "ABC"
+        output_file.puts line.chomp + "abc"
+        output_file.puts line.chomp + "XYZ"
+        output_file.puts line.chomp + "xyz"
+        output_file.puts line.chomp + "QWERTY"
+        output_file.puts line.chomp + "qwerty"
+        output_file.puts line.chomp + "ASD"
+        output_file.puts line.chomp + "asd"
+        output_file.puts line.chomp + "!"
+        output_file.puts line.chomp + "0101"
+        output_file.puts line.chomp + "0201"
+        output_file.puts line.chomp + "0301"
+        output_file.puts line.chomp + "0401"
+        output_file.puts line.chomp + "0501"
+        output_file.puts line.chomp + "0601"
+        output_file.puts line.chomp + "0701"
+        output_file.puts line.chomp + "0801"
+        output_file.puts line.chomp + "0901"
+        output_file.puts line.chomp + "1001"
+        output_file.puts line.chomp + "1101"
+        output_file.puts line.chomp + "1201"
+        output_file.puts line.chomp + "1301"
+        output_file.puts line.chomp + "1401"
+        output_file.puts line.chomp + "1501"
+        output_file.puts line.chomp + "1601"
+        output_file.puts line.chomp + "1701"
+        output_file.puts line.chomp + "1801"
+        output_file.puts line.chomp + "1901"
+        output_file.puts line.chomp + "2001"
+        output_file.puts line.chomp + "2101"
+        output_file.puts line.chomp + "2201"
+        output_file.puts line.chomp + "2301"
+        output_file.puts line.chomp + "2401"
+        output_file.puts line.chomp + "2501"
+        output_file.puts line.chomp + "2601"
+        output_file.puts line.chomp + "2701"
+        output_file.puts line.chomp + "2801"
+        output_file.puts line.chomp + "2901"
+        output_file.puts line.chomp + "3001"
+        output_file.puts line.chomp + "3101"
+        output_file.puts line.chomp + "0102"
+        output_file.puts line.chomp + "0202"
+        output_file.puts line.chomp + "0302"
+        output_file.puts line.chomp + "0402"
+        output_file.puts line.chomp + "0502"
+        output_file.puts line.chomp + "0602"
+        output_file.puts line.chomp + "0702"
+        output_file.puts line.chomp + "0802"
+        output_file.puts line.chomp + "0902"
+        output_file.puts line.chomp + "1002"
+        output_file.puts line.chomp + "1102"
+        output_file.puts line.chomp + "1202"
+        output_file.puts line.chomp + "1302"
+        output_file.puts line.chomp + "1402"
+        output_file.puts line.chomp + "1502"
+        output_file.puts line.chomp + "1602"
+        output_file.puts line.chomp + "1702"
+        output_file.puts line.chomp + "1802"
+        output_file.puts line.chomp + "1902"
+        output_file.puts line.chomp + "2002"
+        output_file.puts line.chomp + "2102"
+        output_file.puts line.chomp + "2202"
+        output_file.puts line.chomp + "2302"
+        output_file.puts line.chomp + "2402"
+        output_file.puts line.chomp + "2502"
+        output_file.puts line.chomp + "2602"
+        output_file.puts line.chomp + "2702"
+        output_file.puts line.chomp + "2802"
+        output_file.puts line.chomp + "2902"
+        output_file.puts line.chomp + "3002"
+        output_file.puts line.chomp + "3102"
+        output_file.puts line.chomp + "0103"
+        output_file.puts line.chomp + "0203"
+        output_file.puts line.chomp + "0303"
+        output_file.puts line.chomp + "0403"
+        output_file.puts line.chomp + "0503"
+        output_file.puts line.chomp + "0603"
+        output_file.puts line.chomp + "0703"
+        output_file.puts line.chomp + "0803"
+        output_file.puts line.chomp + "0903"
+        output_file.puts line.chomp + "1003"
+        output_file.puts line.chomp + "1103"
+        output_file.puts line.chomp + "1203"
+        output_file.puts line.chomp + "1303"
+        output_file.puts line.chomp + "1403"
+        output_file.puts line.chomp + "1503"
+        output_file.puts line.chomp + "1603"
+        output_file.puts line.chomp + "1703"
+        output_file.puts line.chomp + "1803"
+        output_file.puts line.chomp + "1903"
+        output_file.puts line.chomp + "2003"
+        output_file.puts line.chomp + "2103"
+        output_file.puts line.chomp + "2203"
+        output_file.puts line.chomp + "2303"
+        output_file.puts line.chomp + "2403"
+        output_file.puts line.chomp + "2503"
+        output_file.puts line.chomp + "2603"
+        output_file.puts line.chomp + "2703"
+        output_file.puts line.chomp + "2803"
+        output_file.puts line.chomp + "2903"
+        output_file.puts line.chomp + "3003"
+        output_file.puts line.chomp + "3103"
+        output_file.puts line.chomp + "0104"
+        output_file.puts line.chomp + "0204"
+        output_file.puts line.chomp + "0304"
+        output_file.puts line.chomp + "0404"
+        output_file.puts line.chomp + "0504"
+        output_file.puts line.chomp + "0604"
+        output_file.puts line.chomp + "0704"
+        output_file.puts line.chomp + "0804"
+        output_file.puts line.chomp + "0904"
+        output_file.puts line.chomp + "1004"
+        output_file.puts line.chomp + "1104"
+        output_file.puts line.chomp + "1204"
+        output_file.puts line.chomp + "1304"
+        output_file.puts line.chomp + "1404"
+        output_file.puts line.chomp + "1504"
+        output_file.puts line.chomp + "1604"
+        output_file.puts line.chomp + "1704"
+        output_file.puts line.chomp + "1804"
+        output_file.puts line.chomp + "1904"
+        output_file.puts line.chomp + "2004"
+        output_file.puts line.chomp + "2104"
+        output_file.puts line.chomp + "2204"
+        output_file.puts line.chomp + "2304"
+        output_file.puts line.chomp + "2404"
+        output_file.puts line.chomp + "2504"
+        output_file.puts line.chomp + "2604"
+        output_file.puts line.chomp + "2704"
+        output_file.puts line.chomp + "2804"
+        output_file.puts line.chomp + "2904"
+        output_file.puts line.chomp + "3004"
+        output_file.puts line.chomp + "3104"
+        output_file.puts line.chomp + "0105"
+        output_file.puts line.chomp + "0205"
+        output_file.puts line.chomp + "0305"
+        output_file.puts line.chomp + "0405"
+        output_file.puts line.chomp + "0505"
+        output_file.puts line.chomp + "0605"
+        output_file.puts line.chomp + "0705"
+        output_file.puts line.chomp + "0805"
+        output_file.puts line.chomp + "0905"
+        output_file.puts line.chomp + "1005"
+        output_file.puts line.chomp + "1105"
+        output_file.puts line.chomp + "1205"
+        output_file.puts line.chomp + "1305"
+        output_file.puts line.chomp + "1405"
+        output_file.puts line.chomp + "1505"
+        output_file.puts line.chomp + "1605"
+        output_file.puts line.chomp + "1705"
+        output_file.puts line.chomp + "1805"
+        output_file.puts line.chomp + "1905"
+        output_file.puts line.chomp + "2004"
+        output_file.puts line.chomp + "2105"
+        output_file.puts line.chomp + "2205"
+        output_file.puts line.chomp + "2305"
+        output_file.puts line.chomp + "2405"
+        output_file.puts line.chomp + "2505"
+        output_file.puts line.chomp + "2605"
+        output_file.puts line.chomp + "2705"
+        output_file.puts line.chomp + "2805"
+        output_file.puts line.chomp + "2905"
+        output_file.puts line.chomp + "3005"
+        output_file.puts line.chomp + "3105"
+        output_file.puts line.chomp + "0106"
+        output_file.puts line.chomp + "0206"
+        output_file.puts line.chomp + "0306"
+        output_file.puts line.chomp + "0406"
+        output_file.puts line.chomp + "0506"
+        output_file.puts line.chomp + "0606"
+        output_file.puts line.chomp + "0706"
+        output_file.puts line.chomp + "0806"
+        output_file.puts line.chomp + "0906"
+        output_file.puts line.chomp + "1006"
+        output_file.puts line.chomp + "1106"
+        output_file.puts line.chomp + "1206"
+        output_file.puts line.chomp + "1306"
+        output_file.puts line.chomp + "1406"
+        output_file.puts line.chomp + "1506"
+        output_file.puts line.chomp + "1606"
+        output_file.puts line.chomp + "1706"
+        output_file.puts line.chomp + "1806"
+        output_file.puts line.chomp + "1906"
+        output_file.puts line.chomp + "2006"
+        output_file.puts line.chomp + "2106"
+        output_file.puts line.chomp + "2206"
+        output_file.puts line.chomp + "2306"
+        output_file.puts line.chomp + "2406"
+        output_file.puts line.chomp + "2506"
+        output_file.puts line.chomp + "2606"
+        output_file.puts line.chomp + "2706"
+        output_file.puts line.chomp + "2806"
+        output_file.puts line.chomp + "2906"
+        output_file.puts line.chomp + "3006"
+        output_file.puts line.chomp + "3106"
+        output_file.puts line.chomp + "0107"
+        output_file.puts line.chomp + "0207"
+        output_file.puts line.chomp + "0306"
+        output_file.puts line.chomp + "0407"
+        output_file.puts line.chomp + "0507"
+        output_file.puts line.chomp + "0607"
+        output_file.puts line.chomp + "0707"
+        output_file.puts line.chomp + "0807"
+        output_file.puts line.chomp + "0907"
+        output_file.puts line.chomp + "1007"
+        output_file.puts line.chomp + "1107"
+        output_file.puts line.chomp + "1207"
+        output_file.puts line.chomp + "1307"
+        output_file.puts line.chomp + "1407"
+        output_file.puts line.chomp + "1507"
+        output_file.puts line.chomp + "1607"
+        output_file.puts line.chomp + "1707"
+        output_file.puts line.chomp + "1807"
+        output_file.puts line.chomp + "1907"
+        output_file.puts line.chomp + "2007"
+        output_file.puts line.chomp + "2107"
+        output_file.puts line.chomp + "2207"
+        output_file.puts line.chomp + "2307"
+        output_file.puts line.chomp + "2407"
+        output_file.puts line.chomp + "2507"
+        output_file.puts line.chomp + "2607"
+        output_file.puts line.chomp + "2707"
+        output_file.puts line.chomp + "2807"
+        output_file.puts line.chomp + "2907"
+        output_file.puts line.chomp + "3007"
+        output_file.puts line.chomp + "3107"
+        output_file.puts line.chomp + "0108"
+        output_file.puts line.chomp + "0208"
+        output_file.puts line.chomp + "0308"
+        output_file.puts line.chomp + "0408"
+        output_file.puts line.chomp + "0508"
+        output_file.puts line.chomp + "0608"
+        output_file.puts line.chomp + "0708"
+        output_file.puts line.chomp + "0808"
+        output_file.puts line.chomp + "0908"
+        output_file.puts line.chomp + "1008"
+        output_file.puts line.chomp + "1108"
+        output_file.puts line.chomp + "1208"
+        output_file.puts line.chomp + "1308"
+        output_file.puts line.chomp + "1408"
+        output_file.puts line.chomp + "1508"
+        output_file.puts line.chomp + "1608"
+        output_file.puts line.chomp + "1708"
+        output_file.puts line.chomp + "1808"
+        output_file.puts line.chomp + "1908"
+        output_file.puts line.chomp + "2008"
+        output_file.puts line.chomp + "2108"
+        output_file.puts line.chomp + "2208"
+        output_file.puts line.chomp + "2308"
+        output_file.puts line.chomp + "2408"
+        output_file.puts line.chomp + "2508"
+        output_file.puts line.chomp + "2608"
+        output_file.puts line.chomp + "2708"
+        output_file.puts line.chomp + "2808"
+        output_file.puts line.chomp + "2908"
+        output_file.puts line.chomp + "3008"
+        output_file.puts line.chomp + "3108"
+        output_file.puts line.chomp + "0109"
+        output_file.puts line.chomp + "0209"
+        output_file.puts line.chomp + "0309"
+        output_file.puts line.chomp + "0409"
+        output_file.puts line.chomp + "0509"
+        output_file.puts line.chomp + "0609"
+        output_file.puts line.chomp + "0709"
+        output_file.puts line.chomp + "0809"
+        output_file.puts line.chomp + "0909"
+        output_file.puts line.chomp + "1009"
+        output_file.puts line.chomp + "1109"
+        output_file.puts line.chomp + "1209"
+        output_file.puts line.chomp + "1309"
+        output_file.puts line.chomp + "1409"
+        output_file.puts line.chomp + "1509"
+        output_file.puts line.chomp + "1609"
+        output_file.puts line.chomp + "1709"
+        output_file.puts line.chomp + "1809"
+        output_file.puts line.chomp + "1909"
+        output_file.puts line.chomp + "2009"
+        output_file.puts line.chomp + "2109"
+        output_file.puts line.chomp + "2209"
+        output_file.puts line.chomp + "2309"
+        output_file.puts line.chomp + "2409"
+        output_file.puts line.chomp + "2509"
+        output_file.puts line.chomp + "2609"
+        output_file.puts line.chomp + "2709"
+        output_file.puts line.chomp + "2809"
+        output_file.puts line.chomp + "2909"
+        output_file.puts line.chomp + "3009"
+        output_file.puts line.chomp + "3109"
+        output_file.puts line.chomp + "0110"
+        output_file.puts line.chomp + "0210"
+        output_file.puts line.chomp + "0310"
+        output_file.puts line.chomp + "0410"
+        output_file.puts line.chomp + "0510"
+        output_file.puts line.chomp + "0610"
+        output_file.puts line.chomp + "0710"
+        output_file.puts line.chomp + "0810"
+        output_file.puts line.chomp + "0910"
+        output_file.puts line.chomp + "1010"
+        output_file.puts line.chomp + "1110"
+        output_file.puts line.chomp + "1210"
+        output_file.puts line.chomp + "1310"
+        output_file.puts line.chomp + "1410"
+        output_file.puts line.chomp + "1510"
+        output_file.puts line.chomp + "1610"
+        output_file.puts line.chomp + "1710"
+        output_file.puts line.chomp + "1810"
+        output_file.puts line.chomp + "1910"
+        output_file.puts line.chomp + "2010"
+        output_file.puts line.chomp + "2110"
+        output_file.puts line.chomp + "2210"
+        output_file.puts line.chomp + "2310"
+        output_file.puts line.chomp + "2410"
+        output_file.puts line.chomp + "2510"
+        output_file.puts line.chomp + "2610"
+        output_file.puts line.chomp + "2710"
+        output_file.puts line.chomp + "2810"
+        output_file.puts line.chomp + "2910"
+        output_file.puts line.chomp + "3010"
+        output_file.puts line.chomp + "3110"
+        output_file.puts line.chomp + "0111"
+        output_file.puts line.chomp + "0211"
+        output_file.puts line.chomp + "0311"
+        output_file.puts line.chomp + "0411"
+        output_file.puts line.chomp + "0511"
+        output_file.puts line.chomp + "0611"
+        output_file.puts line.chomp + "0711"
+        output_file.puts line.chomp + "0811"
+        output_file.puts line.chomp + "0911"
+        output_file.puts line.chomp + "1011"
+        output_file.puts line.chomp + "1111"
+        output_file.puts line.chomp + "1211"
+        output_file.puts line.chomp + "1311"
+        output_file.puts line.chomp + "1411"
+        output_file.puts line.chomp + "1511"
+        output_file.puts line.chomp + "1611"
+        output_file.puts line.chomp + "1711"
+        output_file.puts line.chomp + "1811"
+        output_file.puts line.chomp + "1911"
+        output_file.puts line.chomp + "2011"
+        output_file.puts line.chomp + "2111"
+        output_file.puts line.chomp + "2211"
+        output_file.puts line.chomp + "2311"
+        output_file.puts line.chomp + "2411"
+        output_file.puts line.chomp + "2511"
+        output_file.puts line.chomp + "2611"
+        output_file.puts line.chomp + "2711"
+        output_file.puts line.chomp + "2811"
+        output_file.puts line.chomp + "2911"
+        output_file.puts line.chomp + "3011"
+        output_file.puts line.chomp + "3111"
+        output_file.puts line.chomp + "0112"
+        output_file.puts line.chomp + "0212"
+        output_file.puts line.chomp + "0312"
+        output_file.puts line.chomp + "0412"
+        output_file.puts line.chomp + "0512"
+        output_file.puts line.chomp + "0612"
+        output_file.puts line.chomp + "0712"
+        output_file.puts line.chomp + "0812"
+        output_file.puts line.chomp + "0912"
+        output_file.puts line.chomp + "1012"
+        output_file.puts line.chomp + "1112"
+        output_file.puts line.chomp + "1212"
+        output_file.puts line.chomp + "1312"
+        output_file.puts line.chomp + "1412"
+        output_file.puts line.chomp + "1512"
+        output_file.puts line.chomp + "1612"
+        output_file.puts line.chomp + "1712"
+        output_file.puts line.chomp + "1812"
+        output_file.puts line.chomp + "1912"
+        output_file.puts line.chomp + "2012"
+        output_file.puts line.chomp + "2112"
+        output_file.puts line.chomp + "2212"
+        output_file.puts line.chomp + "2312"
+        output_file.puts line.chomp + "2412"
+        output_file.puts line.chomp + "2512"
+        output_file.puts line.chomp + "2612"
+        output_file.puts line.chomp + "2712"
+        output_file.puts line.chomp + "2812"
+        output_file.puts line.chomp + "2912"
+        output_file.puts line.chomp + "3012"
+        output_file.puts line.chomp + "3112"
+
+#  add to begining:
+        output_file.puts "111" +  line.chomp
+        output_file.puts "001" +  line.chomp
+        output_file.puts "01" +  line.chomp
+        output_file.puts "1" +  line.chomp
+        output_file.puts "02" +  line.chomp
+        output_file.puts "03" +  line.chomp
+        output_file.puts "04" +  line.chomp
+        output_file.puts "05" +  line.chomp
+        output_file.puts "06" +  line.chomp
+        output_file.puts "07" +  line.chomp
+        output_file.puts "08" +  line.chomp
+        output_file.puts "09" +  line.chomp
+        output_file.puts "10" +  line.chomp
+        output_file.puts "11" +  line.chomp
+        output_file.puts "12" +  line.chomp
+        output_file.puts "100" +  line.chomp
+        output_file.puts "999" +  line.chomp
+        output_file.puts "998" +  line.chomp
+        output_file.puts "123" +  line.chomp
+        output_file.puts "321" +  line.chomp
+        output_file.puts "ABC" +  line.chomp
+        output_file.puts "abc" +  line.chomp
+        output_file.puts "XYZ" +  line.chomp
+        output_file.puts "xyz" +  line.chomp
+        output_file.puts "QWERTY" +  line.chomp
+        output_file.puts "qwerty" +  line.chomp
+        output_file.puts "ASD" +  line.chomp
+        output_file.puts "asd" +  line.chomp
+        output_file.puts "!" +  line.chomp
+  end
+end
+
+output_file.close
+
+# ---------------------------------------------------------------------------------------------
+# sweep - replace some characters
+# ---------------------------------------------------------------------------------------------
+
+sweep = sweep + 1
+puts "sweep " + "#{sweep}" + ": Special character replacements"
+
+output_file = File.open("sweep.tmp3", "w")
+
+File.open("sweep.tmp2", "r") do |f2|
+  while line = f2.gets
+     output_file.puts line
+     if line =~ /s/
+        line.sub!('s','$')
+        output_file.puts line
+     end
+     if line =~ /S/
+        line.gsub!('S','$')
+        output_file.puts line
+     end
+     if line =~ /i/
+        line.sub!('i','1')
+        output_file.puts line
+     end
+     if line =~ /I/
+        line.gsub!('I','1')
+        output_file.puts line
+     end
+     if line =~ /a/
+        line.gsub!('a','@')
+        output_file.puts line
+     end
+     if line =~ /A/
+        line.gsub!('A','@')
+        output_file.puts line
+     end
+     if line =~ /o/
+        line.gsub!('o','0')
+        output_file.puts line
+     end
+     if line =~ /O/
+        line.gsub!('O','0')
+        output_file.puts line
+     end
+  end
+end
+
+output_file.close
+
+# ---------------------------------------------------------------------------------------------
+# sweep - final sweep - drop any pw's less than 8 chars
+# ---------------------------------------------------------------------------------------------
+
+sweep = sweep + 1
+puts "sweep " + "#{sweep}" + ": drop passwords < " + "#{pw_len}"
+num_words = 0
+
+pw_len_num = pw_len.chomp.to_i
+output_file = File.open("sweep.lst", "w")
+File.open("sweep.tmp3", "r") do |f2|
+  while line = f2.gets
+     if line.length > pw_len_num
+        output_file.puts line
+        num_words = num_words + 1
+     else
+        num_words = num_words + 0
+     end
+  end
+end
+
+output_file.close
+puts "COMPLETE"
+puts "#{num_words}" + " passwords written to sweep.lst"
+
